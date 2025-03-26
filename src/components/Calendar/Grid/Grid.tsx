@@ -10,7 +10,7 @@ import { GridProps } from "./types";
 import { StyledCanvas, StyledInnerWrapper, StyledSpan, StyledWrapper } from "./styles";
 
 const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
-  { zoom, rows, data, onTileClick },
+  { zoom, rows, data, onTileClick, dir },
   ref
 ) {
   const { handleScrollNext, handleScrollPrev, date, isLoading, cols, startDate } = useCalendar();
@@ -78,14 +78,27 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   }, [handleScrollPrev]);
 
   return (
-    <StyledWrapper id={canvasWrapperId}>
+    <StyledWrapper id={canvasWrapperId} dir={dir}>
       <StyledInnerWrapper ref={ref}>
-        <StyledSpan position="left" ref={refLeft} />
-        <Loader isLoading={isLoading} position="left" />
-        <StyledCanvas ref={canvasRef} />
-        <Tiles data={data} zoom={zoom} onTileClick={onTileClick} />
-        <StyledSpan ref={refRight} position="right" />
-        <Loader isLoading={isLoading} position="right" />
+        {dir === "rtl" ? (
+          <>
+            <StyledSpan position="right" ref={refLeft} />
+            <Loader isLoading={isLoading} position="right" />
+            <StyledCanvas ref={canvasRef} />
+            <Tiles data={data} zoom={zoom} onTileClick={onTileClick} />
+            <StyledSpan ref={refRight} position="left" />
+            <Loader isLoading={isLoading} position="left" />
+          </>
+        ) : (
+          <>
+            <StyledSpan position="left" ref={refLeft} />
+            <Loader isLoading={isLoading} position="left" />
+            <StyledCanvas ref={canvasRef} />
+            <Tiles data={data} zoom={zoom} onTileClick={onTileClick} />
+            <StyledSpan ref={refRight} position="right" />
+            <Loader isLoading={isLoading} position="right" />
+          </>
+        )}
       </StyledInnerWrapper>
     </StyledWrapper>
   );

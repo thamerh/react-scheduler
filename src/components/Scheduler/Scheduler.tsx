@@ -19,7 +19,8 @@ const Scheduler = ({
   onFilterData,
   onClearFilterData,
   onItemClick,
-  isLoading
+  isLoading,
+  dir
 }: SchedulerProps) => {
   const appConfig: Config = useMemo(
     () => ({
@@ -90,6 +91,7 @@ const Scheduler = ({
                   topBarWidth={topBarWidth ?? 0}
                   onItemClick={onItemClick}
                   toggleTheme={toggleTheme}
+                  dir={dir}
                 />
               </StyledInnerWrapper>
             </StyledOutsideWrapper>

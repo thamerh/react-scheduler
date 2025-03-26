@@ -15,7 +15,8 @@ const LeftColumn: FC<LeftColumnProps> = ({
   pagesAmount,
   searchInputValue,
   onSearchInputChange,
-  onItemClick
+  onItemClick,
+  dir
 }) => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const { search } = useLanguage();

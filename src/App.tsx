@@ -56,7 +56,7 @@ function App() {
     );
 
   return (
-    <>
+    <div >
       <ConfigPanel values={values} onSubmit={setValues} />
       {isFullscreen ? (
         <Scheduler
@@ -66,8 +66,9 @@ function App() {
           isLoading={false}
           onTileClick={handleTileClick}
           onFilterData={handleFilterData}
-          config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage, showThemeToggle: true }}
+          config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage, showThemeToggle: true,lang: "en" }}
           onItemClick={(data) => console.log("clicked: ", data)}
+          dir="ltr"
         />
       ) : (
         <StyledSchedulerFrame>
@@ -79,10 +80,11 @@ function App() {
             onTileClick={handleTileClick}
             onFilterData={handleFilterData}
             onItemClick={(data) => console.log("clicked: ", data)}
+            dir="rtl"
           />
         </StyledSchedulerFrame>
       )}
-    </>
+    </div>
   );
 }
 

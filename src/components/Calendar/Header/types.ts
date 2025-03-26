@@ -3,4 +3,5 @@ export type HeaderProps = {
   topBarWidth: number;
   showThemeToggle?: boolean;
   toggleTheme?: () => void;
+  dir: "ltr" | "rtl";
 };

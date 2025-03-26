@@ -24,7 +24,8 @@ export const Calendar: FC<CalendarProps> = ({
   onTileClick,
   onItemClick,
   toggleTheme,
-  topBarWidth
+  topBarWidth,
+  dir 
 }) => {
   const [tooltipData, setTooltipData] = useState<TooltipData>(initialTooltipData);
   const [filteredData, setFilteredData] = useState(data);
@@ -47,6 +48,7 @@ export const Calendar: FC<CalendarProps> = ({
     previous,
     reset
   } = usePagination(filteredData);
+  
   const debouncedHandleMouseOver = useRef(
     debounce(
       (
@@ -77,6 +79,7 @@ export const Calendar: FC<CalendarProps> = ({
       300
     )
   );
+  
   const debouncedFilterData = useRef(
     debounce((dataToFilter: SchedulerData, enteredSearchPhrase: string) => {
       reset();
@@ -124,7 +127,7 @@ export const Calendar: FC<CalendarProps> = ({
   }, [data, searchPhrase]);
 
   return (
-    <StyledOuterWrapper>
+    <StyledOuterWrapper dir={dir}> 
       <LeftColumn
         data={page}
         pageNum={currentPageNum}
@@ -135,13 +138,15 @@ export const Calendar: FC<CalendarProps> = ({
         searchInputValue={searchPhrase}
         onSearchInputChange={handleSearch}
         onItemClick={onItemClick}
+        dir={dir} 
       />
-      <StyledInnerWrapper>
+      <StyledInnerWrapper dir={"ltr"}> 
         <Header
           zoom={zoom}
           topBarWidth={topBarWidth}
           showThemeToggle={showThemeToggle}
           toggleTheme={toggleTheme}
+          dir={dir} 
         />
         {data.length ? (
           <Grid
@@ -150,6 +155,7 @@ export const Calendar: FC<CalendarProps> = ({
             rows={totalRowsPerPage}
             ref={gridRef}
             onTileClick={onTileClick}
+            dir={dir} 
           />
         ) : (
           <StyledEmptyBoxWrapper width={topBarWidth}>
